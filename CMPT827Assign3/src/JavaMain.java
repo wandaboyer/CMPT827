@@ -22,7 +22,8 @@ public class JavaMain {
 			whichFormulas.add((Integer)5);
 			whichFormulas.add((Integer)6);
 			
-			QCPtoCNF converter = new QCPtoCNF(q_10_01, "q_10_01", whichFormulas);
+			QCPtoCNF converter = new QCPtoCNF();
+			converter.constructFormulas(q_10_01, "q_10_01", whichFormulas);
 		}
 		catch (FileNotFoundException e) {
 			System.out.println("File not found!");
