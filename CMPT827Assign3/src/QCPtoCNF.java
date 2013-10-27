@@ -13,7 +13,7 @@ public class QCPtoCNF {
 		
 		while (!whichFormulas.isEmpty()) {
 			if (whichFormulas.contains((Integer)1)) {
-				outputString += ALO1();
+				outputString += ALO1(problemToConvert);
 				whichFormulas.remove((Integer)1);
 			}
 			if (whichFormulas.contains((Integer)2)) {
@@ -48,11 +48,12 @@ public class QCPtoCNF {
 		for (int row = 0; row < problemToConvert.getN(); row++) {
 			for (int col = 0; col < problemToConvert.getN(); col++) {
 				if (problemToConvert.getProbArr()[row][col] != -1) {
-					outputString += triplesToInteger(row, col, problemToConvert) + " 0";
+					outputString += triplesToInteger(row, col, problemToConvert.getProbArr()[row][col], problemToConvert) + " 0";
 					if (!(row == problemToConvert.getN() - 1 && col == problemToConvert.getN())) {
 						outputString+="\n";
 					}
 					this.numClauses++;
+					this.numVars++;
 				}
 			}
 		}
@@ -62,11 +63,18 @@ public class QCPtoCNF {
 	/*
 	 * ALO-1 : "At least one colour per cell"
 	 */
-	private String ALO1() {
-		String outputString = "";
-		
-		
-		
+	private String ALO1(probInst problemToConvert) {
+		String outputString = new String();
+		for (int row = 0; row < problemToConvert.getN(); row++) {
+			for (int col = 0; col < problemToConvert.getN(); col++) {
+				if (problemToConvert.getProbArr()[row][col] == -1) {
+					for (int i = 0; i < problemToConvert.getN(); i++) {
+						outputString += triplesToInteger(row, col, i, problemToConvert) + " ";
+					}
+					outputString += "0\n";
+				}
+			}	
+		}
 		return outputString;
 	}
 	
@@ -125,11 +133,11 @@ public class QCPtoCNF {
 		return outputString;
 	}
 	
-	private int triplesToInteger (int row, int col, probInst problemToConvert) {
+	private int triplesToInteger (int row, int col, int colour, probInst problemToConvert) {
 		/*
 		 * Uniquely convert a boolean variable into an integer for DIMACS formatting, which is actually base (n+1)
 		 */
-		return (int)((row+1) + (col+1)*(problemToConvert.getN()+1) + problemToConvert.getProbArr()[row][col]*Math.pow(problemToConvert.getN()+1, 2));
+		return (int)((row+1) + (col+1)*(problemToConvert.getN()+1) + colour*Math.pow(problemToConvert.getN()+1, 2));
 	}
 	
 }
