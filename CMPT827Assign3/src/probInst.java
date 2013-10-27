@@ -24,6 +24,13 @@ public class probInst {
 		}
 	}
 	
+	protected int getN() {
+		return this.n;
+	}
+	protected int[][] getProbArr() {
+		return this.probArray;
+	}
+	
 	protected void printArray () {
 		for(int i = 0; i < this.n; i++) {
 			for (int j = 0; j < this.n; j++) {
