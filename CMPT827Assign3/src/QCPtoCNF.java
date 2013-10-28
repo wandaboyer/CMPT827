@@ -137,15 +137,18 @@ public class QCPtoCNF {
 		for (int row = 0; row < problemToConvert.getN(); row++) {
 			for (int col = 0; col < problemToConvert.getN(); col++) {
 				for (int colour1 = 1; colour1 <= problemToConvert.getN(); colour1++) {
-					for (int colour2 = colour1+1; colour2 <= problemToConvert.getN(); colour2++) {
-						dummy1 = triplesToInteger(row, col, colour1, problemToConvert);
-						dummy2 = triplesToInteger(row, col, colour2, problemToConvert);
-						outputString += -dummy1 + " " + -dummy2 + " 0\n";
-						this.vars.add(dummy1);
-						this.vars.add(dummy2);
+					for (int colour2 = 1; colour2 <= problemToConvert.getN(); colour2++) {
+						if (colour1 != colour2) {
+							dummy1 = triplesToInteger(row, col, colour1, problemToConvert);
+							dummy2 = triplesToInteger(row, col, colour2, problemToConvert);
+							outputString += -dummy1 + " " + -dummy2 + " 0\n";
+
+							this.numClauses++;
+							this.vars.add(dummy1);
+							this.vars.add(dummy2);
+						}	
 					}
 				}
-				this.numClauses++;
 			}
 		}
 		return outputString;
@@ -160,15 +163,18 @@ public class QCPtoCNF {
 		for (int row = 0; row < problemToConvert.getN(); row++) {
 			for (int colour = 1; colour <= problemToConvert.getN(); colour++) {
 				for (int col1 = 0; col1 < problemToConvert.getN(); col1++) {
-					for (int col2 = col1+1; col2 < problemToConvert.getN(); col2++) {
-						dummy1 = triplesToInteger(row, col1, colour, problemToConvert);
-						dummy2 = triplesToInteger(row, col2, colour, problemToConvert);
-						outputString += -dummy1 + " " + -dummy2 + " 0\n";
-						this.vars.add(dummy1);
-						this.vars.add(dummy2);
+					for (int col2 = 0; col2 < problemToConvert.getN(); col2++) {
+						if (col1 != col2) {
+							dummy1 = triplesToInteger(row, col1, colour, problemToConvert);
+							dummy2 = triplesToInteger(row, col2, colour, problemToConvert);
+							outputString += -dummy1 + " " + -dummy2 + " 0\n";
+
+							this.numClauses++;
+							this.vars.add(dummy1);
+							this.vars.add(dummy2);
+						}
 					}
 				}
-				this.numClauses++;
 			}
 		}
 		return outputString;
@@ -183,15 +189,18 @@ public class QCPtoCNF {
 		for (int col = 0; col < problemToConvert.getN(); col++) {
 			for (int colour = 1; colour <= problemToConvert.getN(); colour++) {
 				for (int row1 = 0; row1 < problemToConvert.getN(); row1++) {
-					for (int row2 = row1+1; row2 < problemToConvert.getN(); row2++) {
-						dummy1 = triplesToInteger(row1, col, colour, problemToConvert);
-						dummy2 = triplesToInteger(row2, col, colour, problemToConvert);
-						outputString += -dummy1 + " " + -dummy2 + " 0\n";
-						this.vars.add(dummy1);
-						this.vars.add(dummy2);
+					for (int row2 = 0; row2 < problemToConvert.getN(); row2++) {
+						if (row1 != row2) {
+							dummy1 = triplesToInteger(row1, col, colour, problemToConvert);
+							dummy2 = triplesToInteger(row2, col, colour, problemToConvert);
+							outputString += -dummy1 + " " + -dummy2 + " 0\n";
+
+							this.numClauses++;
+							this.vars.add(dummy1);
+							this.vars.add(dummy2);
+						}
 					}
 				}
-				this.numClauses++;
 			}
 		}
 		return outputString;
@@ -201,7 +210,7 @@ public class QCPtoCNF {
 		/*
 		 * Uniquely convert a boolean variable into an integer for DIMACS formatting, which is actually base (n+1)
 		 */
-		return (int)((row+1) + (col+1)*(problemToConvert.getN()+1) + colour*Math.pow(problemToConvert.getN()+1, 2));
+		return (int)((row+1) + (col+1)*(problemToConvert.getN()) + colour*Math.pow(problemToConvert.getN(), 2));
 	}
 	
 }

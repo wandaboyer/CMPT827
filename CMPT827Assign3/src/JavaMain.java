@@ -34,9 +34,9 @@ public class JavaMain {
 			cnfEncoding3D.add(5);
 			cnfEncoding3D.add(6);
 			
-			Scanner whatFiles = new Scanner(new File("whatFiles.txt"));
+			Scanner whatFiles = new Scanner(new File(args[0]));
 			while(whatFiles.hasNext()) {
-				createEncodings(whatFiles.nextLine(), cnfEncoding2D);
+				createEncodings(whatFiles.nextLine(), cnfEncoding3D);
 			}
 			
 			System.out.println("Done!");
