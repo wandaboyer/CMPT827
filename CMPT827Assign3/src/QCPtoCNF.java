@@ -48,7 +48,7 @@ public class QCPtoCNF {
 		for (int row = 0; row < problemToConvert.getN(); row++) {
 			for (int col = 0; col < problemToConvert.getN(); col++) {
 				if (problemToConvert.getProbArr()[row][col] != -1) {
-					outputString += triplesToInteger(row, col, problemToConvert.getProbArr()[row][col]-1, problemToConvert) + " 0\n";
+					outputString += triplesToInteger(row, col, problemToConvert.getProbArr()[row][col], problemToConvert) + " 0\n";
 					this.numClauses++;
 					this.numVars++;
 				}
@@ -65,7 +65,7 @@ public class QCPtoCNF {
 		for (int row = 0; row < problemToConvert.getN(); row++) {
 			for (int col = 0; col < problemToConvert.getN(); col++) {
 				if (problemToConvert.getProbArr()[row][col] == -1) {
-					for (int colour = 0; colour < problemToConvert.getN(); colour++) {
+					for (int colour = 1; colour <= problemToConvert.getN(); colour++) {
 						outputString += triplesToInteger(row, col, colour, problemToConvert) + " ";
 						this.numVars++;
 					}
@@ -83,7 +83,7 @@ public class QCPtoCNF {
 	private String ALO2(probInst problemToConvert) {
 		String outputString = new String();
 		for (int row = 0; row < problemToConvert.getN(); row++) {
-			for (int colour = 0; colour < problemToConvert.getN(); colour++) {
+			for (int colour = 1; colour <= problemToConvert.getN(); colour++) {
 				for (int col = 0; col < problemToConvert.getN(); col++) {
 					if (problemToConvert.getProbArr()[row][col] == -1) {
 						outputString += triplesToInteger(row, col, colour, problemToConvert) + " ";
@@ -104,7 +104,7 @@ public class QCPtoCNF {
 	private String ALO3(probInst problemToConvert) {
 		String outputString = new String();
 		for (int col = 0; col < problemToConvert.getN(); col++) {
-			for (int colour = 0; colour < problemToConvert.getN(); colour++) {
+			for (int colour = 1; colour <= problemToConvert.getN(); colour++) {
 				for (int row = 0; row < problemToConvert.getN(); row++) {
 					if (problemToConvert.getProbArr()[row][col] == -1) {
 						outputString += triplesToInteger(row, col, colour, problemToConvert) + " ";
@@ -121,7 +121,16 @@ public class QCPtoCNF {
 	 * AMO-1 : "Every cell is coloured with at most 1 colour."
 	 */
 	private String AMO1(probInst problemToConvert) {
-		String outputString = "";
+		String outputString = new String();
+		for (int row = 0; row < problemToConvert.getN(); row++) {
+			for (int col = 1; col <= problemToConvert.getN(); col++) {
+				for (int col1 = 1; col1 <= problemToConvert.getN(); col1++) {
+					for (int col2 = col1; col2 <= problemToConvert.getN(); col2++) {
+						
+					}
+				}
+			}
+		}
 
 		
 		
@@ -154,7 +163,7 @@ public class QCPtoCNF {
 		/*
 		 * Uniquely convert a boolean variable into an integer for DIMACS formatting, which is actually base (n+1)
 		 */
-		return (int)((row+1) + (col+1)*(problemToConvert.getN()+1) + (colour+1)*Math.pow(problemToConvert.getN()+1, 2));
+		return (int)((row+1) + (col+1)*(problemToConvert.getN()+1) + colour*Math.pow(problemToConvert.getN()+1, 2));
 	}
 	
 }
