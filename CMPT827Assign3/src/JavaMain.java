@@ -10,21 +10,36 @@ public class JavaMain {
 
 	/**
 	 * @param args
+	 * @throws IOException 
 	 */
+	private static void createEncodings (String filename, TreeSet whichEncoding) throws IOException {
+		Scanner sc = new Scanner(new File(filename+".qcp"));
+		probInst prob = new probInst(sc);
+		QCPtoCNF converter = new QCPtoCNF();
+		converter.constructFormulas(prob, filename, whichEncoding);
+	}
+	
 	public static void main(String[] args) {
 		try{
-			Scanner sc = new Scanner(new File("q_10_01.qcp"));
-			probInst q_10_01 = new probInst(sc);
-			TreeSet<Integer> whichFormulas = new TreeSet<Integer>();
-			whichFormulas.add(1);
-			whichFormulas.add(2);
-			whichFormulas.add(3);
-			whichFormulas.add(4);
-			whichFormulas.add(5);
-			whichFormulas.add(6);
+			TreeSet<Integer> cnfEncoding2D = new TreeSet<Integer>();
+			cnfEncoding2D.add(1);
+			cnfEncoding2D.add(2);
+			cnfEncoding2D.add(3);
 			
-			QCPtoCNF converter = new QCPtoCNF();
-			converter.constructFormulas(q_10_01, "q_10_01", whichFormulas);
+			TreeSet<Integer> cnfEncoding3D = new TreeSet<Integer>();
+			cnfEncoding3D.add(1);
+			cnfEncoding3D.add(2);
+			cnfEncoding3D.add(3);
+			cnfEncoding3D.add(4);
+			cnfEncoding3D.add(5);
+			cnfEncoding3D.add(6);
+			
+			Scanner whatFiles = new Scanner(new File("whatFiles.txt"));
+			while(whatFiles.hasNext()) {
+				createEncodings(whatFiles.nextLine(), cnfEncoding2D);
+			}
+			
+			System.out.println("Done!");
 		}
 		catch (FileNotFoundException e) {
 			System.out.println("File not found!");
