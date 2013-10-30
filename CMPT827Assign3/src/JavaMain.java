@@ -1,7 +1,6 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.TreeSet;
 
@@ -12,7 +11,7 @@ public class JavaMain {
 	 * @param args
 	 * @throws IOException 
 	 */
-	private static void createEncodings (String filename, TreeSet whichEncoding) throws IOException {
+	private static void createEncodings (String filename, TreeSet<Integer> whichEncoding) throws IOException {
 		Scanner sc = new Scanner(new File(filename+".qcp"));
 		probInst prob = new probInst(sc);
 		QCPtoCNF converter = new QCPtoCNF();
@@ -38,6 +37,7 @@ public class JavaMain {
 			while(whatFiles.hasNext()) {
 				createEncodings(whatFiles.nextLine(), cnfEncoding3D);
 			}
+			whatFiles.close();
 			
 			System.out.println("Done!");
 		}
