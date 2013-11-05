@@ -6,11 +6,6 @@ import java.util.TreeSet;
 
 
 public class JavaMain {
-
-	/**
-	 * @param args
-	 * @throws IOException 
-	 */
 	private static void createEncodings (String filename, TreeSet<Integer> whichEncoding) throws IOException {
 		Scanner sc = new Scanner(new File(filename+".qcp"));
 		probInst prob = new probInst(sc);
@@ -33,12 +28,15 @@ public class JavaMain {
 			cnfEncoding3D.add(5);
 			cnfEncoding3D.add(6);
 			
-			Scanner whatFiles = new Scanner(new File(args[0]));
-			while(whatFiles.hasNext()) {
-				createEncodings(whatFiles.nextLine(), cnfEncoding3D);
-			}
-			whatFiles.close();
+			TreeSet<Integer> smarterClauses = new TreeSet<Integer>();
+			smarterClauses.add(7);
+			smarterClauses.add(8);
+			smarterClauses.add(9);
+			smarterClauses.add(10);
+			smarterClauses.add(11);
+			smarterClauses.add(12);
 			
+			createEncodings(args[0], cnfEncoding3D);
 			System.out.println("Done!");
 		}
 		catch (FileNotFoundException e) {
