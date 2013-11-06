@@ -77,7 +77,6 @@ public class QCPtoCNF {
 	}
 	
 	private void createUnitClauses(probInst problemToConvert, PrintWriter output) {
-		int dummy = 0;
 		for (int row = 0; row < problemToConvert.getN(); row++) {
 			for (int col = 0; col < problemToConvert.getN(); col++) {
 				if (problemToConvert.getProbArr()[row][col] != -1) {
@@ -144,8 +143,8 @@ public class QCPtoCNF {
 					for (int colour2 = 1; colour2 <= problemToConvert.getN(); colour2++) {
 						if (colour1 != colour2) {
 							output.write(-triplesToInteger(row, col, colour1, problemToConvert) + " " + -triplesToInteger(row, col, colour2, problemToConvert) + " 0\n");
+							this.numClauses++;
 						}
-						this.numClauses++;
 					}
 				}
 			}
@@ -159,11 +158,11 @@ public class QCPtoCNF {
 		for (int row = 0; row < problemToConvert.getN(); row++) {
 			for (int colour = 1; colour <= problemToConvert.getN(); colour++) {
 				for (int col1 = 0; col1 < problemToConvert.getN(); col1++) {
-					for (int col2 = 1; col2 < problemToConvert.getN(); col2++) {
+					for (int col2 = 0; col2 < problemToConvert.getN(); col2++) {
 						if (col1 != col2) {
 							output.write(-triplesToInteger(row, col1, colour, problemToConvert)+ " " + -triplesToInteger(row, col2, colour, problemToConvert) + " 0\n");
+							this.numClauses++;
 						}
-						this.numClauses++;
 					}
 				}
 			}
@@ -177,11 +176,11 @@ public class QCPtoCNF {
 		for (int col = 0; col < problemToConvert.getN(); col++) {
 			for (int colour = 1; colour <= problemToConvert.getN(); colour++) {
 				for (int row1 = 0; row1 < problemToConvert.getN(); row1++) {
-					for (int row2 = 1; row2 < problemToConvert.getN(); row2++) {
+					for (int row2 = 0; row2 < problemToConvert.getN(); row2++) {
 						if (row1 != row2) {
 							output.write(-triplesToInteger(row1, col, colour, problemToConvert) + " " + -triplesToInteger(row2, col, colour, problemToConvert) + " 0\n");
+							this.numClauses++;
 						}
-						this.numClauses++;
 					}
 				}
 			}
