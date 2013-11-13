@@ -1,0 +1,36 @@
+Author: Wanda B. Boyer
+	301242166
+
+CMPT827 Assignment 3
+__________________
+||OS Information||
+||______________||
+
+Distributor ID:	Ubuntu
+Description:	Ubuntu 13.10
+Release:	13.10
+Codename:	saucy
+__________________
+|| Instructions ||
+||______________||
+
+These instructions are intended for any Linux installation.
+
+Ensure that you change which encoding you wish to produce within JavaMain.java in the invocation of createEncodings 
+(i.e. cnfEncoding2D, cnfEncoding3D, smarterClauses).
+
+Also make sure that you have installed the minisat package.
+
+In the shell:
+1. Type: ’javac JavaMain.java’.
+2. Type: ’chmod 777 ./outputter.sh’ (gives permissions to the script)
+3. Type: ’./outputter.sh’ (will produce output for all problem instances)
+4. Move the produced .cnf files to the appropriate folder (i.e. 2D, 3D, smart)
+5. Based on what encoding you chose, type:
+	(a) ’chmod 777 ./runsat2D.sh’
+	(b) ’chmod 777 ./runsat3D.sh’
+	(c) ’chmod 777 ./runsatsmart.sh’
+6. Based on what encoding you chose, type:
+	(a) ’./runsat2D.sh’ (runs minisat on 2D encodings)
+	(b) ’./runsat3D.sh’
+	(c) ’./runsatsmart.sh’
